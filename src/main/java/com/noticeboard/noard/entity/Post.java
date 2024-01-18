@@ -50,8 +50,4 @@ public class Post {
         postImages.add(postImage);
         postImage.setPost(this);
     }
-
-//    public static Post getPost() {
-//        return getPost(this);
-//    }
 }

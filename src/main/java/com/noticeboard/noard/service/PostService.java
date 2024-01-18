@@ -28,7 +28,7 @@ public class PostService {
 
     // 읽기
     @Transactional(readOnly = true)
-    public List<Post> getPost() {
+    public List<Post> findAll() {
         return postRepository.findAll();
     }
 
@@ -36,9 +36,20 @@ public class PostService {
         return postRepository.findOne(postId);
     }
 
-    // @Transactional(readOnly = false)
     // 수정
+    @Transactional(readOnly = false)
+    public Post updatePost(long postId, AddPostRequestDto updatedPostDto) {
+        Post foundPost = postRepository.findOne(postId);
+        Post post = Post.createPost(foundPost.getPostId(), updatedPostDto.getTitle(), updatedPostDto.getContent(), updatedPostDto.getImageUrl());
+        postRepository.save(post);
+        return post;
+    }
 
-    // @Transactional(readOnly = false)
+    // 삭제
+    @Transactional(readOnly = false)
+    public void deletePost(long postId) {
+        Post deletePost = postRepository.findOne(postId);
+        postRepository.delete(deletePost);
+    }
     // 삭제
 }
