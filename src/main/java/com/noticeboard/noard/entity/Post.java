@@ -18,7 +18,7 @@ import java.util.List;
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long postId;
+    private Long postId;
 
     @ManyToOne
     @JoinColumn(name = "userId")
@@ -38,6 +38,17 @@ public class Post {
 
     public static Post createPost(String title, String content, List<String> imageUrls) {
         Post post = new Post();
+        post.setTitle(title);
+        post.setContent(content);
+        for (String imageUrl : imageUrls) {
+            post.addPostImage(imageUrl);
+        }
+        return post;
+    }
+
+    public static Post createPost(long id, String title, String content, List<String> imageUrls) {
+        Post post = new Post();
+        post.setPostId(id);
         post.setTitle(title);
         post.setContent(content);
         for (String imageUrl : imageUrls) {
