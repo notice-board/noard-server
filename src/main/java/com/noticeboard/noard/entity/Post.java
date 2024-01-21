@@ -1,6 +1,7 @@
 package com.noticeboard.noard.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.noticeboard.noard.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
