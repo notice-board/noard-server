@@ -24,10 +24,20 @@ public class PostController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedPost);
     }
 
-    @GetMapping("/find/{postId}")
-    public ResponseEntity<Post> getPost(@PathVariable("postId") long postId) {
+    @GetMapping("/post/{postId}")
+    public ResponseEntity<Object> getPost(@PathVariable("postId") long postId) {
         Post foundPost = postService.findOne(postId);
-        return ResponseEntity.status(HttpStatus.CREATED).body(foundPost);
+
+        if (foundPost == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("해당 게시물이 존재하지 않습니다.");
+        }
+
+//        List<String> imageUrl = foundPost.getPostImages();
+//        Map<String, Object> response = new HashMap<>();
+//        response.put("post", foundPost);
+//        response.put("imageUrl", imageUrl);
+
+        return ResponseEntity.status(HttpStatus.OK).body(foundPost);
     }
 
     @GetMapping("/post")
